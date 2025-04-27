@@ -10,6 +10,8 @@ use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\URL;
 use App\Mail\VendeurInvitation;
+use App\Notifications\AdminNotification;
+use Illuminate\Support\Facades\Auth;
 
 class AdminVendeurController extends Controller
 {
@@ -42,15 +44,22 @@ class AdminVendeurController extends Controller
 
         $user->roles()->attach(Role::where('name','vendeur')->first());
 
+
         $lien = URL::temporarySignedRoute(
            'vendeur.activation',
             now()->addMinutes(60),
             ['token'=>$user->activation_token]
-        );dd($lien);
+        );
 
         Mail::to($user->email)->send(new VendeurInvitation($user, $lien));
-
+       // Notification à l'administrateur lors de l'envoi de l'invitation
+        $adminRole = Auth::user();
+        if ($adminRole->roles()->where('name', 'admin')->exists()) {
+            $notificationMessage = "Invitation envoyée avec succès à l'adresse mail : " . $user->email;
+            $adminRole->notify(new AdminNotification($notificationMessage));
+        }
         return redirect()->route('admin.vendeurs')->with('success', 'Vendeur ajouté et invitaion envoyé.');
+
 
     }
 }

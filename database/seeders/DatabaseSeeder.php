@@ -21,6 +21,13 @@ class DatabaseSeeder extends Seeder
             vendeurSeeder::class,
             AcheteurSeeder::class,
             AdminSeeder::class,
+            CategorieSousCategorieSeeder::class,
+            TypeSeeder::class,
+            ProduitSeeder::class,
+            ImageSeeder::class,
+
+
+
 
            ]);
     }

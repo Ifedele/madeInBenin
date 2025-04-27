@@ -8,6 +8,9 @@ use App\Models\User;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use App\Notifications\AdminNotification;
+use Illuminate\Support\Facades\Auth;
+
 
 class ActivationController extends Controller
 {
@@ -43,6 +46,20 @@ class ActivationController extends Controller
         $user->activation_token = null;
         $user->save();
 
+
+        // Notification à tous les administrateurs lorsque le vendeur finalise son inscription
+    $adminUsers = User::whereHas('roles', function ($query) {
+        $query->where('name', 'admin');
+    })->get();
+
+    $vendeurNom = $user->vendeur->nom ?? 'Inconnu';
+    $vendeurPrenom = $user->vendeur->prenom ?? '';
+    $notificationMessage = "Le vendeur " . $vendeurNom . " " . $vendeurPrenom . " a finalisé son inscription.";
+    $detailsUrl = route('admin.vendeurShow', $user->vendeur->id ?? null);
+
+    foreach ($adminUsers as $admin) {
+        $admin->notify(new AdminNotification($notificationMessage, $detailsUrl));
+    }
         return redirect()->route('login')->with('success', 'Votre compte a été activé avec succès. Vous pouvez maintenant vous connecter.');
 
     }

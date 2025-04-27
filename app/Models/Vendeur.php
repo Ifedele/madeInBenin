@@ -32,11 +32,12 @@ class Vendeur extends Model
 
     public function produits()
     {
-        return $this->hasMany(Produit::class, 'id_vendeur');
+        return $this->hasMany(Produit::class, 'id_vendeur', 'id');
     }
 
     public function city()
     {
         return $this->belongsTo(City::class, 'city_id');
     }
+
 }

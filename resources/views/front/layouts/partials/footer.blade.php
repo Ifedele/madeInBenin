@@ -2,115 +2,83 @@
     <div class="container">
         <div class="grid grid-cols-1">
             <div class="relative py-16">
-                <!-- Subscribe -->
                 <div class="relative w-full">
                     <div class="relative -top-40 bg-white lg:px-8 px-6 py-10 rounded-xl shadow-sm overflow-hidden">
-                        <div class="grid md:grid-cols-2 grid-cols-1 items-center gap-[30px]">
-                            <div class="md:text-start text-center z-1">
-                                <h3 class="text-[26px] font-semibold text-slate-900">Subscribe to Newsletter!</h3>
-                                <p class="text-slate-400 max-w-xl mx-auto">Subscribe to get latest updates and information.</p>
-                            </div>
-
-                            <div class="subcribe-form z-1">
-                                <form class="relative max-w-lg md:ms-auto">
-                                    <input type="email" id="subcribe" name="email" class="pt-4 pe-40 pb-4 ps-6 w-full h-[50px] outline-none text-slate-900 rounded-full bg-white shadow-sm" placeholder="Enter your email :">
-                                    <button type="submit" class="btn absolute top-[2px] end-[3px] h-[46px] bg-violet-600 hover:bg-violet-700 border-violet-600 hover:border-violet-700 text-white rounded-full">Subscribe</button>
-                                </form><!--end form-->
-                            </div>
-                        </div>
-
                         <div class="absolute -top-5 -start-5">
                             <div class="uil uil-envelope lg:text-[150px] text-7xl text-slate-900/5 -rotate-45"></div>
                         </div>
-
                         <div class="absolute -bottom-5 -end-5">
                             <div class="uil uil-pen lg:text-[150px] text-7xl text-slate-900/5"></div>
                         </div>
                     </div>
+                </div>
+                <div class="grid md:grid-cols-12 grid-cols-1 gap-[30px] -mt-24">
+                    <div class="lg:col-span-4 md:col-span-12">
+                        <a href="{{ url('/') }}" class="text-[22px] focus:outline-none">
+                            <img src="{{asset('storage/assets/images/logo-white.png')}}" alt="Logo de votre site">
+                        </a>
+                        <p class="mt-6 text-gray-300"> La plateforme idéale pour acheter, vendre et découvrir des produits uniques au [Bénin]."</p>
+                    </div><div class="lg:col-span-2 md:col-span-4">
+                        <h5 class="tracking-[1px] text-lg text-gray-100 font-semibold">Navigation</h5>
+                        <ul class="list-none footer-list mt-6">
+                            <li><a href="{{ route('produits.index') }}" class="text-[16px] text-gray-300 hover:text-gray-400 duration-500 ease-in-out"><i class="uil uil-angle-right-b me-1"></i> Explorer</a></li>
+                            <li class="mt-[10px]"><a href="" class="text-[16px] text-gray-300 hover:text-gray-400 duration-500 ease-in-out"><i class="uil uil-angle-right-b me-1"></i> Vendeurs</a></li>
+                            <li class="mt-[10px]"><a href="" class="text-[16px] text-gray-300 hover:text-gray-400 duration-500 ease-in-out"><i class="uil uil-angle-right-b me-1"></i> Contact</a></li>
+                            <li class="mt-[10px]"><a href="" class="text-[16px] text-gray-300 hover:text-gray-400 duration-500 ease-in-out"><i class="uil uil-angle-right-b me-1"></i> À propos</a></li>
+                            {{-- Ajoutez d'autres liens de navigation si nécessaire --}}
+                        </ul>
+                    </div><div class="lg:col-span-3 md:col-span-4">
+                        <h5 class="tracking-[1px] text-lg text-gray-100 font-semibold">Liens Utiles</h5>
+                        <ul class="list-none footer-list mt-6">
+                            <li><a href="#" class="text-[16px] text-gray-300 hover:text-gray-400 duration-500 ease-in-out"><i class="uil uil-angle-right-b me-1"></i> Conditions d'utilisation</a></li>
+                            <li class="mt-[10px]"><a href="#" class="text-[16px] text-gray-300 hover:text-gray-400 duration-500 ease-in-out"><i class="uil uil-angle-right-b me-1"></i> Politique de confidentialité</a></li>
+                            <li><a href="{{ route('login') }}" class="text-[16px] text-gray-300 hover:text-gray-400 duration-500 ease-in-out"><i class="uil uil-angle-right-b me-1"></i> Se connecter</a></li>
+                            <li><a href="{{ route('register') }}" class="text-[16px] text-gray-300 hover:text-gray-400 duration-500 ease-in-out"><i class="uil uil-angle-right-b me-1"></i> S'inscrire</a></li>
+                            <li><a href="" class="text-[16px] text-gray-300 hover:text-gray-400 duration-500 ease-in-out"><i class="uil uil-angle-right-b me-1"></i>Devenir vendeur</a></li>
+                            {{-- Ajoutez d'autres liens utiles si nécessaire --}}
+                        </ul>
+                    </div><div class="lg:col-span-3 md:col-span-4">
+                        <h5 class="tracking-[1px] text-lg text-gray-100 font-semibold">Contact</h5>
 
-                    <div class="grid md:grid-cols-12 grid-cols-1 gap-[30px] -mt-24">
-                        <div class="lg:col-span-4 md:col-span-12">
-                            <a href="#" class="text-[22px] focus:outline-none">
-                                <img src="{{asset('storage/assets/images/logo-white.png')}}" alt="">
-                            </a>
-                            <p class="mt-6 text-gray-300">Buy, sell and discover exclusive digital assets by the top artists of NFTs world.</p>
-
-                        </div><!--end col-->
-
-                        <div class="lg:col-span-2 md:col-span-4">
-                            <h5 class="tracking-[1px] text-lg text-gray-100 font-semibold">Giglink</h5>
-                            <ul class="list-none footer-list mt-6">
-                                <li><a href="explore-one.html" class="text-[16px] text-gray-300 hover:text-gray-400 duration-500 ease-in-out"><i class="uil uil-angle-right-b me-1"></i> Explore Item</a></li>
-                                <li class="mt-[10px]"><a href="auction.html" class="text-[16px] text-gray-300 hover:text-gray-400 duration-500 ease-in-out"><i class="uil uil-angle-right-b me-1"></i> Live Auction</a></li>
-                                <li class="mt-[10px]"><a href="activity.html" class="text-[16px] text-gray-300 hover:text-gray-400 duration-500 ease-in-out"><i class="uil uil-angle-right-b me-1"></i> Activities</a></li>
-                                <li class="mt-[10px]"><a href="wallet.html" class="text-[16px] text-gray-300 hover:text-gray-400 duration-500 ease-in-out"><i class="uil uil-angle-right-b me-1"></i> Wallets</a></li>
-                                <li class="mt-[10px]"><a href="creators.html" class="text-[16px] text-gray-300 hover:text-gray-400 duration-500 ease-in-out"><i class="uil uil-angle-right-b me-1"></i> Creators</a></li>
-                            </ul>
-                        </div><!--end col-->
-
-                        <div class="lg:col-span-3 md:col-span-4">
-                            <h5 class="tracking-[1px] text-lg text-gray-100 font-semibold">Usefull Links</h5>
-                            <ul class="list-none footer-list mt-6">
-                                <li><a href="aboutus.html" class="text-[16px] text-gray-300 hover:text-gray-400 duration-500 ease-in-out"><i class="uil uil-angle-right-b me-1"></i> About Us</a></li>
-                                <li class="mt-[10px]"><a href="blogs.html" class="text-[16px] text-gray-300 hover:text-gray-400 duration-500 ease-in-out"><i class="uil uil-angle-right-b me-1"></i> Blog & News</a></li>
-                                <li class="mt-[10px]"><a href="terms.html" class="text-[16px] text-gray-300 hover:text-gray-400 duration-500 ease-in-out"><i class="uil uil-angle-right-b me-1"></i> Terms & Condition</a></li>
-                                <li class="mt-[10px]"><a href="privacy.html" class="text-[16px] text-gray-300 hover:text-gray-400 duration-500 ease-in-out"><i class="uil uil-angle-right-b me-1"></i> Privacy policy</a></li>
-                                <li class="mt-[10px]"><a href="login.html" class="text-[16px] text-gray-300 hover:text-gray-400 duration-500 ease-in-out"><i class="uil uil-angle-right-b me-1"></i> Login</a></li>
-                                <li class="mt-[10px]"><a href="contact.html" class="text-[16px] text-gray-300 hover:text-gray-400 duration-500 ease-in-out"><i class="uil uil-angle-right-b me-1"></i> Contact Us</a></li>
-                            </ul>
-                        </div><!--end col-->
-
-                        <div class="lg:col-span-3 md:col-span-4">
-                            <h5 class="tracking-[1px] text-lg text-gray-100 font-semibold">Download the Giglink app</h5>
-
-                            <ul class="list-none mt-6">
-                                <li class="inline"><img src="{{asset('storage/assets/images/app.png')}}" class="h-9 inline-block" alt=""></li>
-                                <li class="inline"><img src="{{asset('storage/assets/images/playstore.png')}}" class="h-9 inline-block" alt=""></li>
-                            </ul>
-
-                            <div class="mt-6">
-                                <h5 class="tracking-[1px] text-lg text-gray-100 font-semibold">Contact Details</h5>
-
-                                <div class="flex mt-6">
-                                    <i data-feather="mail" class="w-5 h-5 text-violet-600 me-3 mt-1"></i>
-                                    <div class="">
-                                        <a href="mailto:contact@example.com" class="text-[16px] text-gray-300 hover:text-gray-400 duration-500 ease-in-out">contact@example.com</a>
-                                    </div>
-                                </div>
-
-                                <div class="flex mt-6">
-                                    <i data-feather="phone" class="w-5 h-5 text-violet-600 me-3 mt-1"></i>
-                                    <div class="">
-                                        <a href="tel:+152534-468-854" class="text-[16px] text-gray-300 hover:text-gray-400 duration-500 ease-in-out">+152 534-468-854</a>
-                                    </div>
+                        <div class="mt-6">
+                            <div class="flex">
+                                <i data-feather="mail" class="w-5 h-5 text-violet-600 me-3 mt-1"></i>
+                                <div class="">
+                                    <a href="" class="text-[16px] text-gray-300 hover:text-gray-400 duration-500 ease-in-out">contact@madeinbenin.com</a>
                                 </div>
                             </div>
-                        </div><!--end col-->
-                    </div><!--end grid-->
+
+                            <div class="flex mt-6">
+                                <i data-feather="phone" class="w-5 h-5 text-violet-600 me-3 mt-1"></i>
+                                <div class="">
+                                    <a href="" class="text-[16px] text-gray-300 hover:text-gray-400 duration-500 ease-in-out">+2290144731148</a>
+                                </div>
+                            </div>
+                            {{-- Ajoutez d'autres informations de contact si nécessaire --}}
+                        </div>
+
+                        <div class="mt-6">
+                            <h5 class="tracking-[1px] text-lg text-gray-100 font-semibold">Suivez-nous</h5>
+                            <ul class="list-none mt-4 flex">
+                                <li class="me-4"><a href="#" class="text-gray-300 hover:text-gray-400"><i data-feather="facebook" class="w-5 h-5"></i></a></li>
+                                <li class="me-4"><a href="#" class="text-gray-300 hover:text-gray-400"><i data-feather="twitter" class="w-5 h-5"></i></a></li>
+                                <li class="me-4"><a href="#" class="text-gray-300 hover:text-gray-400"><i data-feather="instagram" class="w-5 h-5"></i></a></li>
+                                {{-- Ajoutez d'autres icônes de réseaux sociaux --}}
+                            </ul>
+                        </div>
+                    </div>
                 </div>
-                <!-- Subscribe -->
             </div>
         </div>
-    </div><!--end container-->
-
+    </div>
     <div class="py-[30px] px-0 border-t border-gray-800">
         <div class="container text-center">
             <div class="grid md:grid-cols-2 items-center gap-6">
                 <div class="md:text-start text-center">
-                    <p class="mb-0 text-gray-300">© <script>document.write(new Date().getFullYear())</script> Giglink. Design with <i class="mdi mdi-heart text-red-600"></i> by <a href="https://shreethemes.in/" target="_blank" class="text-reset">Shreethemes</a>.</p>
+                    <p class="mb-0 text-gray-300">© <script>document.write(new Date().getFullYear())</script> Made In Benin</p>
                 </div>
-
-                <ul class="list-none md:text-end text-center">
-                    <li class="inline"><a href="https://1.envato.market/giglink" target="_blank" class="btn btn-icon btn-sm border border-gray-800 rounded-md hover:border-violet-600 hover:bg-violet-600"><i class="uil uil-shopping-cart align-middle" title="Buy Now"></i></a></li>
-                    <li class="inline"><a href="https://dribbble.com/shreethemes" target="_blank" class="btn btn-icon btn-sm border border-gray-800 rounded-md hover:border-violet-600 hover:bg-violet-600"><i class="uil uil-dribbble align-middle" title="dribbble"></i></a></li>
-                    <li class="inline"><a href="https://www.behance.net/shreethemes" target="_blank" class="btn btn-icon btn-sm border border-gray-800 rounded-md hover:border-violet-600 hover:bg-violet-600"><i class="uil uil-behance" title="Behance"></i></a></li>
-                    <li class="inline"><a href="http://linkedin.com/company/shreethemes" target="_blank" class="btn btn-icon btn-sm border border-gray-800 rounded-md hover:border-violet-600 hover:bg-violet-600"><i class="uil uil-linkedin" title="Linkedin"></i></a></li>
-                    <li class="inline"><a href="https://www.facebook.com/shreethemes" target="_blank" class="btn btn-icon btn-sm border border-gray-800 rounded-md hover:border-violet-600 hover:bg-violet-600"><i class="uil uil-facebook-f align-middle" title="facebook"></i></a></li>
-                    <li class="inline"><a href="https://www.instagram.com/shreethemes/" target="_blank" class="btn btn-icon btn-sm border border-gray-800 rounded-md hover:border-violet-600 hover:bg-violet-600"><i class="uil uil-instagram align-middle" title="instagram"></i></a></li>
-                    <li class="inline"><a href="https://twitter.com/shreethemes" target="_blank" class="btn btn-icon btn-sm border border-gray-800 rounded-md hover:border-violet-600 hover:bg-violet-600"><i class="uil uil-twitter align-middle" title="twitter"></i></a></li>
-                    <li class="inline"><a href="mailto:support@shreethemes.in" class="btn btn-icon btn-sm border border-gray-800 rounded-md hover:border-violet-600 hover:bg-violet-600"><i class="uil uil-envelope align-middle" title="email"></i></a></li>
-                </ul><!--end icon-->
-            </div><!--end grid-->
-        </div><!--end container-->
+                {{-- Vous pouvez ajouter une autre section ici si nécessaire --}}
+            </div>
+        </div>
     </div>
 </footer>

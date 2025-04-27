@@ -39,6 +39,38 @@ class UserSeeder extends Seeder
 
         $role = Role::where('name', 'acheteur')->first();
         $user->roles()->attach($role);
+
+        $user = User::create([
+            'email'=>'justine@exemple.com',
+            'password'=>Hash::make('password123')
+        ]);
+
+        $role = Role::where('name', 'vendeur')->first();
+        $user->roles()->attach($role);
+
+        $user = User::create([
+            'email'=>'Franck@exemple.com',
+            'password'=>Hash::make('password123')
+        ]);
+
+        $role = Role::where('name', 'vendeur')->first();
+        $user->roles()->attach($role);
+        $user = User::create([
+            'email'=>'marianne@exemple.com',
+            'password'=>Hash::make('password123')
+        ]);
+
+        $role = Role::where('name', 'vendeur')->first();
+        $user->roles()->attach($role);
+
+        $user = User::create([
+            'email'=>'fenou@exemple.com',
+            'password'=>Hash::make('password123')
+        ]);
+
+        $role = Role::where('name', 'vendeur')->first();
+        $user->roles()->attach($role);
+
     }
 
 

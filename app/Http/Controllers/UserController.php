@@ -9,6 +9,7 @@ use Barryvdh\DomPDF\Facade\Pdf;
 
 class UserController extends Controller
 {
+
     public function vendeurs()
     {
        $vendeurs = User::whereHas('roles', function ($q) {
@@ -62,5 +63,5 @@ class UserController extends Controller
         return $pdf->download('liste_acheteurs.pdf');
     }
 
-    
+
 }

@@ -3,6 +3,8 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\View\Composers\NotificationComposer;
+use Illuminate\Support\Facades\View;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -18,8 +20,7 @@ class AppServiceProvider extends ServiceProvider
      * Bootstrap any application services.
      */
     public function boot(): void
-    {
-        view()->share('errors', \Illuminate\Support\Facades\Session::get('errors') ?: new \Illuminate\Support\ViewErrorBag);
-        require base_path('routes/breadcrumbs.php');
-    }
+{
+    View::composer('admin.layouts.master', NotificationComposer::class);
+}
 }

@@ -16,7 +16,7 @@ class CheckRole
     public function handle(Request $request, Closure $next, $role)
     {
         if(!auth()->check() || !auth()->user()->hasRole($role)) {
-            return redirect('/')->with('error', 'Accès non autorisé');
+            return redirect('')->with('error', 'Accès non autorisé');
         }
         return $next($request);
     }

@@ -27,3 +27,6 @@
     </head>
 
     <body class="font-urbanist text-base text-slate-900">
+        <div id="ajoutPanierConfirmation" class="fixed top-4 left-1/2 transform -translate-x-1/2 bg-green-500 text-white py-3 px-6 rounded-md shadow-md z-50 hidden">
+            <p class="font-semibold">Produit ajouté au panier !</p>
+        </div>

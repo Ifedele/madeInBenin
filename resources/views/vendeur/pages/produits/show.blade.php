@@ -46,13 +46,7 @@
                     <button class="inline-flex items-center gap-2 px-4 py-3 text-sm font-medium text-white transition rounded-lg bg-warning-500 shadow-theme-xs hover:bg-warning-600">
                         <a href="{{route('produits.edit', $produit->id)}}">Modifier</a>
                     </button>
-                    <form action="{{route('produits.destroy', $produit->id)}}" method="POST" onsubmit="return confirm('Voulez-vous vraiment supprimer ce produit ?');">
-                         @csrf
-                        @method('DELETE')
-                        <button class="inline-flex items-center gap-2 px-4 py-3 text-sm font-medium text-white transition rounded-lg bg-error-500 shadow-theme-xs hover:bg-error-600" type="submit">
-                            Supprimer
-                        </button>
-                    </form>
+                    
                     <button class="inline-flex items-center gap-2 px-4 py-3 text-sm font-medium text-white transition rounded-lg bg-gray-500 shadow-theme-xs hover:bg-light-600">
                         <a href="{{route('produits.index')}}">Retour</a>
                         </button>

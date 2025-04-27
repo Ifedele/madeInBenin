@@ -12,25 +12,86 @@ use App\Http\Controllers\SousCategorieController;
 use App\Http\Controllers\AdminVendeurController;
 use App\Http\Controllers\Vendeur\ActivationController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\Admin\NotificationController;
+use App\Http\Controllers\Front\ExploreController;
+use App\Http\Controllers\Front\VendeurViewController;
+use App\Http\Controllers\Front\ProduitViewController;
+use App\Http\Controllers\Front\PanierController;
 use Illuminate\Support\Facades\Route;
+use Illuminate\Http\Request; // N'oubliez pas d'importer la classe Request
+use App\Models\User;
+use App\Models\Vendeur;
+use Illuminate\Support\Carbon;
+use Illuminate\Support\Facades\DB;
+use App\Models\Produit;
+
+Route::get('/', function (Request $request) {
+    // 1️⃣ Période
+    $period    = $request->input('period', 'week');
+    $startDate = match ($period) {
+        'month' => Carbon::now()->subMonth(),
+        'year'  => Carbon::now()->subYear(),
+        default => Carbon::now()->subWeek(),
+    };
+
+    // 2️⃣ Requête avec COUNT(l.id)
+    $topSellers = DB::table('users as u')
+        ->join('vendeurs         as v',  'v.idUser',      '=', 'u.id')
+        ->join('produits         as p',  'p.id_vendeur',  '=', 'v.id')
+        ->join('details_commandes as dc', 'dc.id_produit', '=', 'p.id')
+        ->join('commandes        as c',  'c.id', '=', 'dc.id_commande')
+        ->join('livraisons       as l',  'l.id_commande', '=', 'c.id')
+        ->where('l.statut_livraison', 'effectuee')
+        ->where('l.date_livraison', '>=',  $startDate)
+        ->select(
+            'u.*',
+            // On compte bien l.id (colonne "id" de la table livraisons)
+            DB::raw('COUNT(l.id) AS livraisons_count')
+        )
+        ->groupBy(
+            'u.id',
+            'u.email',
+            'u.password',
+            'u.activation_token',
+            'u.email_verified_at',
+            'u.remember_token',
+            'u.created_at',
+            'u.updated_at'
+        )
+        ->orderByDesc('livraisons_count')
+        ->limit(9)
+        ->get();
+        $topSellingItems = DB::table('details_commandes')
+        ->select('id_produit', DB::raw('COUNT(id_produit) as total_sold'))
+        ->groupBy('id_produit')
+        ->orderByDesc('total_sold')
+        ->take(8) // Afficher les 8 articles les plus vendus
+        ->get();
+
+    // Récupérer les informations complètes des produits
+    $topSellingProducts = \App\Models\Produit::whereIn('id', $topSellingItems->pluck('id_produit'))
+        ->get();
+    // 3️⃣ Redirections si connecté
+    if ($user = auth()->user()) {
+        if ($user->hasRole('admin'))   { return redirect('/admin/dashboard'); }
+        if ($user->hasRole('vendeur')) { return redirect('/vendeur/dashboard'); }
+    }
+
+    $newProducts = Produit::orderByDesc('created_at')
+    ->take(6) // Afficher les 6 produits les plus récents
+    ->get();
+
+    $randomProducts = Produit::with('images') // Assurez-vous de charger la relation 'images'
+            ->inRandomOrder()
+            ->take(5) // Ajustez le nombre d'images à afficher
+            ->get();
+    // 4️⃣ Vue publique
+    return view('front.pages.index', compact('topSellers','period','topSellingProducts','newProducts','randomProducts' ));
+});
 
 //activation
 Route::get('/vendeur/activation/{token}', [ActivationController::class , 'showForm'])->name('vendeur.activation')->middleware('signed');
 Route::post('/vendeur/activation/{token}', [ActivationController::class, 'processForm'])->name('vendeur.activation.submit');
-
-Route::get('/', function () {
-    if(auth()->check()){
-        $user =auth()->user();
-
-        if($user->hasRole('admin')) {
-            return redirect('/admin/dashboard');
-        }
-        if ($user->hasRole('vendeur')) {
-            return redirect('/vendeur/dashboard');
-        }
-    }
-    return view('front.pages.index');
-});
 
 // Route::get('/admin/dashboard', function () {
     // return view('admin/pages/index');:
@@ -54,15 +115,24 @@ Route::middleware(['auth', 'role:admin'])->group(function(){
     Route::get('/acheteur/{user}', [UserController::class,'showAcheteur'])->name('admin.acheteurShow');
     Route::get('/admin/vendeurs/pdf', [UserController::class, 'exportVendeursPdf'])->name('admin.vendeurs.pdf');
     Route::get('/admin/acheteurs/pdf', [UserController::class, 'exportAcheteursPdf'])->name('admin.acheteurs.pdf');
+    Route::get('/admin/notifications/check', [NotificationController::class ,'checkNotifications'])->name('admin.notifications.check');
 });
 
 //vendeur
 Route::middleware(['auth', 'role:vendeur'])->group(function (){
-    Route::get('/vendeur/dashboard', [VendeurController::class,'index'])->name('vendeur.dashboard');
+    Route::get('/vendeurs/dashboard', [VendeurController::class,'index'])->name('vendeur.dashboard');
 
 });
 
-
+//Acheteur
+Route::middleware('auth','role:acheteur')->group(function () {
+    Route::get('/panier/ajouter/{produit}', [PanierController::class, 'ajouterAuPanier'])->name('panier.ajouter');
+});
+// front
+Route::get('/front/explore', [ExploreController::class, 'index'])->name('explore.index');
+Route::get('/front/vendeur', [VendeurViewController::class, 'index'])->name('vendeurview.index');
+Route::get('/front/vendeur/{id}', [VendeurViewController::class, 'view'])->name('vendeur.view');
+Route::get('/front/produit/{id}', [ProduitViewController::class, 'View'])->name('produit.view');
 //Catégorie
 Route::middleware('auth')->group(function (){
     Route::get('/categorie/addCat', [CategorieController::class, 'create'])->name('categorie.add');
@@ -94,17 +164,7 @@ Route::middleware('auth')->group(function (){
     Route::delete('/produits/{destroy}', [ProduitController::class, 'destroy'])->name('produits.destroy');
 });
 
-Route::get('/session-test', function( Request $request) {
-    session(['test'=>'Session fonctionne !']);return session('test');
-});
 
-Route::get('/test-session', function( Request $request) {
-    session(['test_key' => 'session fonctionne bien!']);
-    return session()->all();
-});
-Route::post('/test-session-form', function( ) {
-    return view('auth.test-session');
-});
 
 
 require __DIR__.'/auth.php';

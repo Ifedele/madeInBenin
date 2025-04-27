@@ -12,7 +12,7 @@ class Commande extends Model
 {
     use HasFactory;
     protected $fillable=[
-        
+
         'date_com',
         'montant',
         'statut',
@@ -35,5 +35,12 @@ class Commande extends Model
     public function livraison()
     {
         return $this->hasOne(Livraison::class, 'id_commande');
-    }
+   }
+
+   public function produits(): BelongsToMany
+   {
+       return $this->belongsToMany(Produit::class, 'details_commandes', 'id_commande', 'id_produit')
+                   ->withPivot('quantite', 'prix_unitaire') // Si ces colonnes existent dans detail_commande
+                   ->withTimestamps(); // Si created_at et updated_at existent dans detail_commande
+   }
 }

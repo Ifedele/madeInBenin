@@ -16,7 +16,7 @@ class Acheteur extends Model
         'nom',
         'prenom',
         'tel',
-        'photo_profile',
+       
     ];
     public function utilisateur()
     {

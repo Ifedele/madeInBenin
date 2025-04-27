@@ -4,8 +4,8 @@
         <h2>
             Finalisez votre inscription
         </h2>
-
-        <form action="{{route('vendeur.activation', ['token' => $token])}}" method="POST">
+        {{-- <h4>Token reçu : {{ $token }}</h4> --}}
+        <form action="{{route('vendeur.activation.submit', ['token' => $token])}}" method="POST">
             @csrf
             <div class="-mx-2.5 flex flex-wrap gap-y-5">
                  <div class="w-full px-2.5">

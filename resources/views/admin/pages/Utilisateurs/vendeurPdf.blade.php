@@ -1,124 +1,54 @@
-
-<div class="overflow-hidden rounded-2xl border border-gray-200 bg-white pt-4 dark:border-gray-800 dark:bg-white/[0.03]">
-
-    <div class="flex flex-col gap-5 px-6 mb-4 sm:flex-row sm:items-center sm:justify-between">
-      <div>
-        <h3 class="text-lg font-semibold text-gray-800 dark:text-white/90">
-          Liste des Vendeurs
+<div style="overflow: hidden; border: 1px solid #ccc; border-radius: 8px; background-color: #fff; padding-top: 16px;">
+    <div style="text-align: center; margin-bottom: 16px;">
+        <h3 style="font-size: 1.25rem; font-weight: 600; color: #374151;">
+            Liste des Vendeurs
         </h3>
-      </div>
-    </div>
     </div>
 
-        <div class="max-w-full overflow-x-auto custom-scrollbar">
-            <table class="min-w-full">
-                <!-- table header start -->
-                <thead class="border-gray-100 border-y bg-gray-50 dark:border-gray-800 dark:bg-gray-900">
+    <div style="max-width: 100%; overflow-x: auto;">
+        <table style="min-width: 100%; width: 100%; border-collapse: collapse; border: 1px solid #ccc;">
+            <thead style="background-color: #f3f4f6;">
                 <tr>
-                    <th class="px-6 py-3 whitespace-nowrap">
-                        <div class="flex items-center">
-                            <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
-                                Nom
-                            </p>
-                        </div>
+                    <th style="padding: 8px; font-weight: 500; color: #4b5563; border: 1px solid #ccc;">
+                        Nom
                     </th>
-                    <th class="px-6 py-3 whitespace-nowrap">
-                        <div class="flex items-center">
-                            <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
-                                Prénom
-                            </p>
-                        </div>
+                    <th style="padding: 8px; font-weight: 500; color: #4b5563; border: 1px solid #ccc;">
+                        Prénom
                     </th>
-                    <th class="px-6 py-3 whitespace-nowrap">
-                        <div class="flex items-center justify-center">
-                            <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
-                                Raison sociale
-                            </p>
-                        </div>
+                    <th style="padding: 8px; font-weight: 500; color: #4b5563; border: 1px solid #ccc;">
+                        Raison Sociale
                     </th>
-                    <th class="px-6 py-3 whitespace-nowrap">
-                        <div class="flex items-center justify-center">
-                            <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
-                                Téléphone
-                            </p>
-                        </div>
+                     <th style="padding: 8px; font-weight: 500; color: #4b5563; border: 1px solid #ccc;">
+                        Téléphone
                     </th>
-                    <th class="px-6 py-3 whitespace-nowrap">
-                        <div class="flex items-center justify-center">
-                            <p class="font-medium text-gray-500 text-theme-xs dark:text-gray-400">
-                               Email
-                            </p>
-                        </div>
+                    <th style="padding: 8px; font-weight: 500; color: #4b5563; border: 1px solid #ccc;">
+                        Email
                     </th>
 
                 </tr>
-                </thead>
-                <!-- table header end -->
+            </thead>
+            <tbody>
+                @foreach ($vendeurs as $user)
+                <tr>
+                    <td style="padding: 8px; border: 1px solid #ccc;">
+                        <span style="font-size: 0.875rem; color: #374151;">{{ $user->vendeur->nom ?? '-' }}</span>
+                    </td>
+                    <td style="padding: 8px; border: 1px solid #ccc;">
+                        <span style="font-size: 0.875rem; color: #374151;">{{ $user->vendeur->prenom ?? '-' }}</span>
+                    </td>
+                    <td style="padding: 8px; border: 1px solid #ccc;">
+                        <span style="font-size: 0.875rem; color: #374151;">{{ $user->vendeur->raison_social ?? '-' }}</span>
+                    </td>
+                     <td style="padding: 8px; border: 1px solid #ccc;">
+                        <span style="font-size: 0.875rem; color: #374151;">{{ $user->vendeur->telephone ?? '-' }}</span>
+                    </td>
+                    <td style="padding: 8px; border: 1px solid #ccc;">
+                        <span style="font-size: 0.875rem; color: #374151;">{{ $user->email }}</span>
+                    </td>
 
-                <!-- table body start -->
-                <tbody class="divide-y divide-gray-100 dark:divide-gray-800">
-                    @foreach ($vendeurs as $user  )
-                        <tr>
-                            <td class="px-6 py-3 whitespace-nowrap">
-                                <div class="flex items-center">
-                                    <div class="flex items-center gap-3">
-                                    <div>
-                                        <span class="text-theme-sm mb-0.5 block font-medium text-gray-700 dark:text-gray-400">
-                                        {{$user->vendeur->nom ?? '-'}}
-                                        </span>
-                                    </div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="px-6 py-3 whitespace-nowrap">
-                                <div class="flex items-center">
-                                    <div class="flex items-center gap-3">
-                                    <div>
-                                        <span class="text-theme-sm mb-0.5 block font-medium text-gray-700 dark:text-gray-400">
-                                            {{$user->vendeur->prenom ?? '-'}}
-                                        </span>
-                                    </div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="px-6 py-3 whitespace-nowrap">
-                                <div class="flex items-center">
-                                    <div class="flex items-center gap-3">
-                                    <div>
-                                        <span class="text-theme-sm mb-0.5 block font-medium text-gray-700 dark:text-gray-400">
-                                            {{$user->vendeur->raison_social ?? '-'}}
-                                        </span>
-                                    </div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="px-6 py-3 whitespace-nowrap">
-                                <div class="flex items-center">
-                                    <div class="flex items-center gap-3">
-                                    <div>
-                                        <span class="text-theme-sm mb-0.5 block font-medium text-gray-700 dark:text-gray-400">
-                                            {{$user->vendeur->telephone ?? '-'}}
-                                        </span>
-                                    </div>
-                                    </div>
-                                </div>
-                            </td>
-                            <td class="px-6 py-3 whitespace-nowrap">
-                                <div class="flex items-center">
-                                    <div class="flex items-center gap-3">
-                                    <div>
-                                        <span class="text-theme-sm mb-0.5 block font-medium text-gray-700 dark:text-gray-400">
-                                            {{$user->email}}
-                                        </span>
-                                    </div>
-                                    </div>
-                                </div>
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-                <!-- table body end -->
-            </table>
-        </div>
-  </div>
-
+                </tr>
+                @endforeach
+            </tbody>
+        </table>
+    </div>
+</div>

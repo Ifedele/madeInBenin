@@ -31,6 +31,8 @@ class User extends Authenticatable
         return $this->hasOne(Vendeur::class, 'idUser','id');
     }
 
+
+   
     public function acheteur()
     {
         return $this->hasOne(Acheteur::class, 'idUser');
@@ -61,6 +63,7 @@ class User extends Authenticatable
 
         'email',
         'password',
+        'activation_token',
     ];
 
     /**

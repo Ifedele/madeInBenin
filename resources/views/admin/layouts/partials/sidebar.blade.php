@@ -11,13 +11,10 @@ class="sidebar fixed top-0 left-0 z-9999 flex h-screen w-[290px] flex-col overfl
  :class="sidebarToggle ? 'justify-center' : 'justify-between'"
  class="flex items-center gap-2 pt-8 sidebar-header pb-7"
 >
- <a href="{route('/')}">
-   <span class="logo" :class="sidebarToggle ? 'hidden' : ''">
-    <label for=""><h3><strong>TABLEAU DE BORD</strong></h3></label>
-   </span>
-
-   {{-- <LAbel><H3><STRong>TABLEAU DE BORD</STRong></H3></LAbel> --}}
- </a>
+<a href="{route('/')}" class="">
+    <img class="dark:hidden" src="{{asset('storage/assetsd/src/images/logo/logo.svg')}}" alt="Logo">
+    <img class="hidden dark:block" src="{{asset('storage/assetsd/src/images/logo/logo-dark.svg')}}" alt="Logo">
+  </a>
 </div>
 <!-- SIDEBAR HEADER -->
 
